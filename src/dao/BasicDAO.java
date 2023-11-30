@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author 韩顺平
+ * @author 李俊呈
  * @version 1.0
  * 开发BasicDAO , 是其他DAO的父类
  */

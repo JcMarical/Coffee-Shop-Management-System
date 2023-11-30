@@ -18,7 +18,7 @@ public class BillService {
     public boolean orderMenu(int menuID, int nums, int diningTableID){
         String billID = UUID.randomUUID().toString();
 
-        int update = billDAO.update("insert into mhl.bill values(null,?,?,?,?,?,now(),'未结账')",
+        int update = billDAO.update("insert into bill values(null,?,?,?,?,?,now(),'未结账')",
                         billID, menuID, nums, menuService.getMenuByID(menuID).getPrice()*nums, diningTableID);
         if(update <= 0){
             return false;
@@ -28,18 +28,18 @@ public class BillService {
 
     // 返回所有账单
     public List<Bill> list(){
-        return billDAO.queryMulti("select * from mhl.bill", Bill.class);
+        return billDAO.queryMulti("select * from bill", Bill.class);
     }
 
     // 查看某个餐桌是否有未结账的账单
     public boolean hasPayBillByDiningTableID(int diningTableID){
-        return billDAO.querySingle("select * from mhl.bill where diningTableID=? and state='未结账' limit 0,1", Bill.class, diningTableID)!=null;
+        return billDAO.querySingle("select * from bill where diningTableID=? and state='未结账' limit 0,1", Bill.class, diningTableID)!=null;
     }
 
     // 完成结账[如果餐桌存在，并且该餐桌有未结账的账单]
     public boolean payBill(int diningTableID, String payMode){
         // 修改bill表
-        int update = billDAO.update("update mhl.bill set state=? where diningTableID=? and state='未结账'", payMode, diningTableID);
+        int update = billDAO.update("update bill set state=? where diningTableID=? and state='未结账'", payMode, diningTableID);
         if(update<=0){
             return false;
         }

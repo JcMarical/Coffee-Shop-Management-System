@@ -12,7 +12,7 @@ import utils.Utility;
 
 import java.util.List;
 
-public class MHLView {
+public class EmployeeView {
     // 控制是否推出菜单
     private boolean loop = true;
     private String key = "";
@@ -72,7 +72,7 @@ public class MHLView {
     // 显示所有菜品
     public void listMenu(){
         List<Menu> list = menuService.list();
-        System.out.println("\t菜品编号\t\t菜品名\t\t类别\t\t价格");
+        System.out.println("\t餐品编号\t\t餐品名\t\t类别\t\t价格");
         for(Menu menu:list){
             System.out.println(menu);
         }
@@ -88,13 +88,13 @@ public class MHLView {
             System.out.println("===================取消点餐=============");
             return;
         }
-        System.out.print("请输入点餐的菜品号(-1t退出): ");
+        System.out.print("请输入点餐的餐品号(-1t退出): ");
         int orderMenuID = Utility.readInt();
         if(orderMenuID==-1){
             System.out.println("===================取消点餐=============");
             return;
         }
-        System.out.print("请输入点餐的菜品量(-1t退出): ");
+        System.out.print("请输入点餐的餐品量(-1t退出): ");
         int orderNums = Utility.readInt();
         if(orderNums==-1){
             System.out.println("===================取消点餐=============");
@@ -110,7 +110,7 @@ public class MHLView {
         // 验证菜品编号
         Menu menuByID = menuService.getMenuByID(orderMenuID);
         if(menuByID==null){
-            System.out.println("===================菜品不存在=============");
+            System.out.println("===================饮品/甜点不存在=============");
             return;
         }
         if(billService.orderMenu(orderMenuID, orderNums, orderDiningTableID)){
@@ -124,7 +124,7 @@ public class MHLView {
 
     public void listBill(){
         List<Bill> allBills = billService.list();
-        System.out.println("\t编号\t\t菜品号\t\t菜品量\t\t金额\t\t\t桌号\t\t日期\t\t\t\t\t\t\t状态");
+        System.out.println("\t编号\t\t餐品号\t\t餐品量\t\t金额\t\t\t桌号\t\t日期\t\t\t\t\t\t\t状态");
         for(Bill bill : allBills){
             System.out.println(bill);
         }
@@ -174,15 +174,15 @@ public class MHLView {
     // 显示主菜单
     public void mainMenu(){
         while(loop){
-            System.out.println("=================满汉楼===============");
-            System.out.println("\t\t 1 登录满汉楼");
-            System.out.println("\t\t 2 退出满汉楼");
+            System.out.println("================品悦咖啡===============");
+            System.out.println("\t\t 1 登录品悦咖啡");
+            System.out.println("\t\t 2 退出品悦咖啡");
             System.out.print("请输入你的选择: ");
             key = Utility.readString(1);
             switch (key){
                 case "1" :
                     // System.out.println("登录满汉楼");
-                    System.out.print("请输入员工号: ");
+                    System.out.print("请输入账号: ");
                     String empID = Utility.readString(50);
                     System.out.print("请输入密码: ");
                     String pwd = Utility.readString(50);
@@ -192,17 +192,17 @@ public class MHLView {
                     Employee employee = employeeService.getEmptyeeByIdAndPwd(empID, pwd);
 
                     if(employee!=null){
-                        System.out.println("=================登录成功["+employee.getName()+"]===============\n");
+                        System.out.println("=================登录成功，店员["+employee.getName()+"]===============\n");
                         // 显示二级菜单,这里应该是循环操作
                         while(loop){
                             System.out.println("=================满汉楼===============");
                             System.out.println("\t\t 1 显示餐桌状态");
                             System.out.println("\t\t 2 预定餐桌");
-                            System.out.println("\t\t 3 显示所有菜品");
+                            System.out.println("\t\t 3 显示所有饮品/甜点");
                             System.out.println("\t\t 4 点餐服务");
                             System.out.println("\t\t 5 查看账单");
                             System.out.println("\t\t 6 结账");
-                            System.out.println("\t\t 7 ...");
+                            System.out.println("\t\t 7 顾客信息查询");
                             System.out.println("\t\t 8 ...");
                             System.out.println("\t\t 9 退出");
                             System.out.print("请输入你的选择: ");
@@ -231,7 +231,7 @@ public class MHLView {
                                     break;
                                 case "9":
                                     loop = false;
-                                    System.out.println("退出满汉楼系统");
+                                    System.out.println("退出品悦咖啡系统");
                                     break;
                                 default:
                                     System.out.println("你的输入有误，请重新输入");
@@ -245,7 +245,7 @@ public class MHLView {
                     break;
                 case "2":
                     loop = false;
-                    System.out.println("退出满汉楼");
+                    System.out.println("退出品悦咖啡系统");
                     break;
                 default:
                     System.out.println("你的输入有误,请重新输入");
@@ -254,7 +254,7 @@ public class MHLView {
     }
 
     public static void main(String[] args) {
-        MHLView mhlView = new MHLView();
-        mhlView.mainMenu();
+        EmployeeView employeeView = new EmployeeView();
+        employeeView.mainMenu();
     }
 }

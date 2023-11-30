@@ -9,8 +9,10 @@ public class EmployeeService {
     private EmployeeDAO employeeDAO = new EmployeeDAO();
 
     // 方法，根据empID和pwd返回一个Employee对象
+
+    
     public Employee getEmptyeeByIdAndPwd(String empID, String pwd){
-        Employee employee = employeeDAO.querySingle("select * from mhl.employee where empID=? and pwd=md5(?)", Employee.class, empID, pwd);
+        Employee employee = employeeDAO.querySingle("select * from employee where empID=? and pwd=md5(?)", Employee.class, empID, pwd);
         return employee;
     }
 }

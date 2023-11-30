@@ -1,4 +1,4 @@
-## 品悦咖啡
+## 咖啡店后台管理系统
 本项目使用用到了java SE、MySQL、JDBC，其中连接池使用Druid。
 
 ### 程序总体框架
@@ -122,8 +122,8 @@ public class MHLView {
     }
 
     public static void main(String[] args) {
-        MHLView mhlView = new MHLView();
-        mhlView.mainMenu();
+        MHLView employeeView = new MHLView();
+        employeeView.mainMenu();
     }
 }
 ```
@@ -133,9 +133,9 @@ public class MHLView {
 ### 3、sql
 
 ```sql
--- 创建满汉楼数据库
-CREATE DATABASE mhl;
-USE mhl;
+-- 创建品悦咖啡数据库
+CREATE DATABASE coffeeShop;
+USE coffeeShop;
 
 -- 创建employ表
 CREATE TABLE `employee`(
@@ -147,13 +147,46 @@ CREATE TABLE `employee`(
 	PRIMARY KEY (id)
 )CHARSET=utf8;
 -- 添加测试数据
-INSERT INTO employee VALUES(NULL, '6668615', MD5('123456'), '张三丰', '经理');
-INSERT INTO employee VALUES(NULL, '6668612', MD5('123456'), '小龙女', '服务员');
-INSERT INTO employee VALUES(NULL, '6668633', MD5('123456'), '张无忌', '收银员');
-INSERT INTO employee VALUES(NULL, '666666', MD5('123456'), '老韩', '经理');
+
+INSERT INTO employee VALUES(NULL, '000001', MD5('123456'), '李欣怡', '店员');
+INSERT INTO employee VALUES(NULL, '000002', MD5('123456'), '李艳超', '店员');
+INSERT INTO employee VALUES(NULL, '000003', MD5('123456'), '郑佳颖', '店员');
 
 SELECT * FROM employee;
-DROP TABLE employee;
+
+-- 创建customer表
+CREATE TABLE `customer`(
+                           id INT AUTO_INCREMENT,
+                           empID VARCHAR(50) UNIQUE NOT NULL DEFAULT '',
+                           pwd CHAR(32) NOT NULL DEFAULT '',
+                           NAME VARCHAR(50) NOT NULL DEFAULT '',
+                           job VARCHAR(50) NOT NULL DEFAULT '',
+                           PRIMARY KEY (id)
+)CHARSET=utf8;
+-- 添加测试数据
+
+INSERT INTO customer VALUES(NULL, '100001', MD5('123456'), '李怡欣', '会员');
+INSERT INTO customer VALUES(NULL, '100002', MD5('123456'), '李超艳', '会员');
+INSERT INTO customer VALUES(NULL, '100003', MD5('123456'), '郑颖佳', '会员');
+
+SELECT * FROM customer;
+
+-- 创建administor表
+CREATE TABLE `administer`(
+                           id INT AUTO_INCREMENT,
+                           empID VARCHAR(50) UNIQUE NOT NULL DEFAULT '',
+                           pwd CHAR(32) NOT NULL DEFAULT '',
+                           NAME VARCHAR(50) NOT NULL DEFAULT '',
+                           job VARCHAR(50) NOT NULL DEFAULT '',
+                           PRIMARY KEY (id)
+)CHARSET=utf8;
+-- 添加测试数据
+
+INSERT INTO administer VALUES(NULL, '200001', MD5('123456'), '李俊呈', '管理员');
+
+
+SELECT * FROM administer; 
+
 
 -- 创建餐桌表
 CREATE TABLE `diningTable`(
@@ -181,13 +214,13 @@ CREATE TABLE `menu`(
 	PRIMARY KEY (id)
 )CHARSET=utf8;
 
-INSERT INTO menu VALUES(NULL, '八宝饭', '主食', 10);
-INSERT INTO menu VALUES(NULL, '叉烧包', '主食', 20);
-INSERT INTO menu VALUES(NULL, '宫保鸡丁', '热菜', 30);
-INSERT INTO menu VALUES(NULL, '松鼠鳜鱼', '热菜', 50);
-INSERT INTO menu VALUES(NULL, '水煮鱼', '热菜',50);
-INSERT INTO menu VALUES(NULL, '甲鱼汤', '汤类', 100);
-INSERT INTO menu VALUES(NULL, '鸡蛋汤', '汤类', 15);
+INSERT INTO menu VALUES(NULL, '生椰拿铁', '咖啡', 10);
+INSERT INTO menu VALUES(NULL, '冰吸生椰拿铁', '咖啡', 20);
+INSERT INTO menu VALUES(NULL, '经典美式', '咖啡', 15);
+INSERT INTO menu VALUES(NULL, '抹茶拿铁', '咖啡', 20);
+INSERT INTO menu VALUES(NULL, '曲奇饼', '甜点',20);
+INSERT INTO menu VALUES(NULL, '小蛋糕', '甜点', 30);
+INSERT INTO menu VALUES(NULL, '菠萝派', '甜点', 15);
 
 SELECT * FROM menu;
 
