@@ -12,7 +12,7 @@ import utils.Utility;
 
 import java.util.List;
 
-public class EmployeeView {
+public class AdministorView {
     // 控制是否推出菜单
     private boolean loop = true;
     private String key = "";
@@ -184,7 +184,7 @@ public class EmployeeView {
             key = Utility.readString(1);
             switch (key){
                 case "1" :
-                    System.out.println("登录品悦咖啡");
+                    // System.out.println("登录满汉楼");
                     System.out.print("请输入账号: ");
                     String empID = Utility.readString(50);
                     System.out.print("请输入密码: ");
@@ -199,17 +199,11 @@ public class EmployeeView {
                         System.out.println("=================登录成功，店员["+employee.getName()+"]===============\n");
                         // 显示二级菜单,这里应该是循环操作
                         while(loop){
-                            System.out.println("=================品悦咖啡===============");
-                            System.out.println("\t\t 1 显示餐桌状态");
-                            System.out.println("\t\t 2 预定餐桌");
+                            System.out.println("=================满汉楼===============");
                             System.out.println("\t\t 3 显示所有饮品/甜点");
-                            System.out.println("\t\t 4 点餐服务");
-                            System.out.println("\t\t 5 查看账单");
-                            System.out.println("\t\t 6 结账");
                             System.out.println("\t\t 7 顾客信息查询");
                             System.out.println("\t\t 8 ...");
                             System.out.println("\t\t 9 退出");
-                            System.out.println("======================================");
                             System.out.print("请输入你的选择: ");
                             key = Utility.readString(1);
                             switch (key){
@@ -241,7 +235,6 @@ public class EmployeeView {
                                 default:
                                     System.out.println("你的输入有误，请重新输入");
                             }
-
                         }
 
                     }else{
@@ -277,7 +270,7 @@ public class EmployeeView {
     }
 
     public static void main(String[] args) {
-        EmployeeView employeeView = new EmployeeView();
+        AdministorView employeeView = new AdministorView();
         employeeView.mainMenu();
     }
 }

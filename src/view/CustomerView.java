@@ -12,7 +12,7 @@ import utils.Utility;
 
 import java.util.List;
 
-public class EmployeeView {
+public class CustomerView {
     // 控制是否推出菜单
     private boolean loop = true;
     private String key = "";
@@ -277,7 +277,7 @@ public class EmployeeView {
     }
 
     public static void main(String[] args) {
-        EmployeeView employeeView = new EmployeeView();
+        CustomerView employeeView = new CustomerView();
         employeeView.mainMenu();
     }
 }

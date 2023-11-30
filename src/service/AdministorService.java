@@ -3,9 +3,7 @@ package service;
 import bean.Employee;
 import dao.EmployeeDAO;
 
-import java.util.UUID;
-
-public class EmployeeService {
+public class AdministorService {
     // 通过调用EmployeeDAO来完成对employ表的各种操作
     // 定义一个EmployDAO属性
     private EmployeeDAO employeeDAO = new EmployeeDAO();
