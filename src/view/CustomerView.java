@@ -1,13 +1,7 @@
 package view;
 
-import bean.Bill;
-import bean.DiningTable;
-import bean.Employee;
-import bean.Menu;
-import service.BillService;
-import service.DiningTableService;
-import service.EmployeeService;
-import service.MenuService;
+import bean.*;
+import service.*;
 import utils.Utility;
 
 import java.util.List;
@@ -19,6 +13,8 @@ public class CustomerView {
     private DiningTableService diningTableService = new DiningTableService();
     private MenuService menuService = new MenuService();
     private BillService billService = new BillService();
+
+    private TakeoutsService takeoutsService = new TakeoutsService();
 
     public void listDiningTable(){
         System.out.println("显示餐桌状态");
@@ -115,10 +111,63 @@ public class CustomerView {
         }
         if(billService.orderMenu(orderMenuID, orderNums, orderDiningTableID)){
             System.out.println("===================点餐成功=============");
-        }else{
+        }
+        else{
             System.out.println("===================点餐失败=============");
             return;
         }
+
+    }
+
+    public void orderTakeouts(){
+        System.out.println("===================外卖服务======================");
+        System.out.print("请输入外卖的地址 ");
+        String orderDiningTableAddress = Utility.readString(50);
+
+
+        System.out.print("请输入点餐的餐品号(-1t退出): ");
+        int orderMenuID = Utility.readInt();
+        if(orderMenuID==-1){
+            System.out.println("===================取消外卖=============");
+            return;
+        }
+        System.out.print("请输入点餐的餐品量(-1t退出): ");
+        int orderNums = Utility.readInt();
+        if(orderNums==-1){
+            System.out.println("===================取消外卖=============");
+            return;
+        }
+        // 验证菜品编号
+
+        Menu menuByID = menuService.getMenuByID(orderMenuID);
+        if(menuByID==null){
+            System.out.println("===================饮品/甜点不存在=============");
+            return;
+        }
+
+        //直接结账
+        System.out.print("请选择结账方式(现金/支付宝/微信): ");
+        String payMode = Utility.readString(10);
+        if(payMode.equals("")){
+            System.out.println("==================取消结账===============");
+            return;
+        }
+        char key = Utility.readConfirmSelection();
+        if(key=='Y'){
+            System.out.println("==================结账成功===============");
+
+            if(takeoutsService.orderTakeoutsMenu(orderMenuID, orderNums,orderDiningTableAddress)){
+                System.out.println("=================点外卖成功=============");
+            }else{
+                System.out.println("=================点外卖失败=============");
+                return;
+            }
+
+        }
+        else {
+            System.out.println("==================取消结账===============");
+        }
+
 
     }
 
@@ -173,7 +222,7 @@ public class CustomerView {
 
     // 显示主菜单
     public void mainMenu(){
-        EmployeeService employeeService = new EmployeeService();
+        CustomerService customerService = new CustomerService();
         while(loop){
             System.out.println("================品悦咖啡===============");
             System.out.println("\t\t 1 登录品悦咖啡");
@@ -193,10 +242,10 @@ public class CustomerView {
 
                     // 到数据库去判断
 
-                    Employee employee = employeeService.getEmployeeByIdAndPwd(empID, pwd);
+                    Customer customer = customerService.getCustomerByIdAndPwd(empID, pwd);
 
-                    if(employee!=null){
-                        System.out.println("=================登录成功，店员["+employee.getName()+"]===============\n");
+                    if(customer!=null){
+                        System.out.println("=================登录成功，顾客["+customer.getName()+"]===============\n");
                         // 显示二级菜单,这里应该是循环操作
                         while(loop){
                             System.out.println("=================品悦咖啡===============");
@@ -204,11 +253,9 @@ public class CustomerView {
                             System.out.println("\t\t 2 预定餐桌");
                             System.out.println("\t\t 3 显示所有饮品/甜点");
                             System.out.println("\t\t 4 点餐服务");
-                            System.out.println("\t\t 5 查看账单");
-                            System.out.println("\t\t 6 结账");
-                            System.out.println("\t\t 7 顾客信息查询");
-                            System.out.println("\t\t 8 ...");
-                            System.out.println("\t\t 9 退出");
+                            System.out.println("\t\t 5 外卖服务");
+                            System.out.println("\t\t 6 查看账单");
+                            System.out.println("\t\t 7 退出");
                             System.out.println("======================================");
                             System.out.print("请输入你的选择: ");
                             key = Utility.readString(1);
@@ -226,15 +273,13 @@ public class CustomerView {
                                     orderMenu();
                                     break;
                                 case "5":
-                                    listBill();
+                                    orderTakeouts();
                                     break;
                                 case "6":
-                                    payBill();
+                                    listBill();
+
                                     break;
                                 case "7":
-                                case "8":
-                                    break;
-                                case "9":
                                     loop = false;
                                     System.out.println("退出品悦咖啡系统");
                                     break;
@@ -250,7 +295,7 @@ public class CustomerView {
 
                     break;
                 case "2":
-                    // System.out.println("登录满汉楼");
+                    // System.out.println("登录品悦咖啡");
                     System.out.print("请输入账号: ");
                     String empRegisterID = Utility.readString(50);
                     System.out.print("请输入密码: ");
@@ -259,7 +304,7 @@ public class CustomerView {
                     String nameRegister = Utility.readString(50);
 
                     // 到数据库去判断
-                    boolean flag =  employeeService.setEmployeeByIdAndPwd(empRegisterID, pwdRegister,nameRegister);
+                    boolean flag =  customerService.setCustomerByIdAndPwd(empRegisterID, pwdRegister,nameRegister);
                     if(flag){
                         System.out.print("注册成功！！！");
                     }else{
@@ -277,7 +322,7 @@ public class CustomerView {
     }
 
     public static void main(String[] args) {
-        CustomerView employeeView = new CustomerView();
-        employeeView.mainMenu();
+        CustomerView customerView = new CustomerView();
+        customerView.mainMenu();
     }
 }

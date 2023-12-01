@@ -35,97 +35,7 @@ public class Test {
 在view层下建立MHLView文件
 
 ```java
-package view;
-
-import utils.Utility;
-
-public class MHLView {
-    // 控制是否推出菜单
-    private boolean loop = true;
-    private String key = "";
-    // 显示主菜单
-    public void mainMenu(){
-        while(loop){
-            System.out.println("=================满汉楼===============");
-            System.out.println("\t\t 1 登录满汉楼");
-            System.out.println("\t\t 2 退出满汉楼");
-            System.out.print("请输入你的选择: ");
-            key = Utility.readString(1);
-            switch (key){
-                case "1" :
-                    // System.out.println("登录满汉楼");
-                    System.out.print("请输入员工号: ");
-                    String id = Utility.readString(50);
-                    System.out.print("请输入密码: ");
-                    String pwd = Utility.readString(50);
-
-                    // 到数据库去判断
-                    if("123".equals(pwd)){
-                        System.out.println("=================登录成功===============\n");
-                        // 显示二级菜单,这里应该是循环操作
-                        while(loop){
-                            System.out.println("=================满汉楼===============");
-                            System.out.println("\t\t 1 显示餐桌状态");
-                            System.out.println("\t\t 2 预定餐桌");
-                            System.out.println("\t\t 3 显示所有菜品");
-                            System.out.println("\t\t 4 点餐服务");
-                            System.out.println("\t\t 5 查看账单");
-                            System.out.println("\t\t 6 结账");
-                            System.out.println("\t\t 7 ...");
-                            System.out.println("\t\t 8 ...");
-                            System.out.println("\t\t 9 退出");
-                            System.out.print("请输入你的选择: ");
-                            key = Utility.readString(1);
-                            switch (key){
-                                case "1":
-                                    System.out.println("显示餐桌状态");
-                                    break;
-                                case "2":
-                                    System.out.println("预定餐桌");
-                                    break;
-                                case "3":
-                                    System.out.println("显示所有菜品");
-                                    break;
-                                case "4":
-                                    System.out.println("点餐服务");
-                                    break;
-                                case "5":
-                                    System.out.println("查看账单");
-                                    break;
-                                case "6":
-                                    System.out.println("结账");
-                                case "7":
-                                case "8":
-                                    break;
-                                case "9":
-                                    loop = false;
-                                    System.out.println("退出满汉楼系统");
-                                    break;
-                                default:
-                                    System.out.println("你的输入有误，请重新输入");
-                            }
-                        }
-
-                    }else{
-                        System.out.println("=================登录失败===============");
-                    }
-
-                    break;
-                case "2":
-                    loop = false;
-                    System.out.println("退出满汉楼");
-                    break;
-                default:
-                    System.out.println("你的输入有误,请重新输入");
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        MHLView employeeView = new MHLView();
-        employeeView.mainMenu();
-    }
-}
+ 略
 ```
 
 ![image-20210701164612447](C:\Users\songpeng\IdeaProjects\manhanlou\README.assets\image-20210701164612447.png)
@@ -205,6 +115,23 @@ SELECT * FROM diningTable;
 
 # update diningTable set state='空', orderName='', orderTel='' where id=1
 
+-- 创建餐桌表
+CREATE TABLE `diningTable`(
+                              id INT AUTO_INCREMENT,
+                              state VARCHAR(20) NOT NULL DEFAULT '',
+                              ordername VARCHAR(50) NOT NULL DEFAULT '',
+                              ordertel VARCHAR(20) NOT NULL DEFAULT '',
+                              PRIMARY KEY (id)
+)CHARSET=utf8;
+
+INSERT INTO diningTable VALUES(NULL, '空', '', '');
+INSERT INTO diningTable VALUES(NULL, '空', '', '');
+INSERT INTO diningTable VALUES(NULL, '空', '', '');
+
+SELECT * FROM diningTable;
+
+# update diningTable set state='空', orderName='', orderTel='' where id=1
+
 -- 创建菜单表(id, name, type, price)
 CREATE TABLE `menu`(
 	id INT AUTO_INCREMENT,
@@ -239,6 +166,23 @@ CREATE TABLE bill(
 
 SELECT * FROM bill;
 
+
+-- 创建账单表 bill(id, billID, menuID, nums, billDate, money, stae, diningTableID)
+CREATE TABLE takeoutsBill(
+                     id INT AUTO_INCREMENT,
+                     billID VARCHAR(50) NOT NULL DEFAULT '',
+                     menuID INT NOT NULL DEFAULT 0,
+                     nums INT NOT NULL DEFAULT 0,
+                     money DOUBLE NOT NULL DEFAULT 0,
+                     billDate DATETIME NOT NULL,
+                     state VARCHAR(50) NOT NULL DEFAULT '',
+                     address VARCHAR(50) NOT NULL DEFAULT '',
+                     PRIMARY KEY (id)
+)CHARSET=utf8;
+
+SELECT * FROM takeOutsBill;
+
+
 # update diningTable set state='空' where id=1;
 ```
 
@@ -248,5 +192,22 @@ SELECT * FROM bill;
 
 - 将上面的sql语句执行（mysql 8.0.22）
 - 修改druid.properties中的相关配置：
-
-- ......
+```aidl
+#key=value
+driverClassName=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://192.168.173.132:3306/lingrui?&serverTimezone=UTC&rewriteBatchedStatements=true
+#url=jdbc:mysql://192.168.173.132:3306/lingrui
+username=root
+password=123456
+#initial connection Size
+initialSize=10
+#min idle connecton size
+minIdle=5
+#max active connection size
+maxActive=20
+#max wait time (5000 mil seconds)
+maxWait=5000
+```
+- url:192.168.173.132:3306 修改为自己的ip地址（莫得服务器）
+- 数据库名：lingrui 修改成自己的数据库名
+- password：123456 修改成自己的密码

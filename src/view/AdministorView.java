@@ -184,7 +184,7 @@ public class AdministorView {
             key = Utility.readString(1);
             switch (key){
                 case "1" :
-                    // System.out.println("登录满汉楼");
+                    // System.out.println("登录品悦咖啡");
                     System.out.print("请输入账号: ");
                     String empID = Utility.readString(50);
                     System.out.print("请输入密码: ");
@@ -199,11 +199,13 @@ public class AdministorView {
                         System.out.println("=================登录成功，店员["+employee.getName()+"]===============\n");
                         // 显示二级菜单,这里应该是循环操作
                         while(loop){
-                            System.out.println("=================满汉楼===============");
-                            System.out.println("\t\t 3 显示所有饮品/甜点");
-                            System.out.println("\t\t 7 顾客信息查询");
-                            System.out.println("\t\t 8 ...");
-                            System.out.println("\t\t 9 退出");
+                            System.out.println("=================品悦咖啡===============");
+                            System.out.println("\t\t 1 显示所有饮品/甜点");
+                            System.out.println("\t\t 2 顾客信息查询");
+                            System.out.println("\t\t 3 店员信息查询");
+                            System.out.println("\t\t 4 顾客信息删除");
+                            System.out.println("\t\t 5 店员信息删除");
+                            System.out.println("\t\t 6 退出");
                             System.out.print("请输入你的选择: ");
                             key = Utility.readString(1);
                             switch (key){
@@ -243,7 +245,7 @@ public class AdministorView {
 
                     break;
                 case "2":
-                    // System.out.println("登录满汉楼");
+                    // System.out.println("登录品悦咖啡");
                     System.out.print("请输入账号: ");
                     String empRegisterID = Utility.readString(50);
                     System.out.print("请输入密码: ");

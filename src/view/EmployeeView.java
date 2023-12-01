@@ -207,7 +207,7 @@ public class EmployeeView {
                             System.out.println("\t\t 5 查看账单");
                             System.out.println("\t\t 6 结账");
                             System.out.println("\t\t 7 顾客信息查询");
-                            System.out.println("\t\t 8 ...");
+                            System.out.println("\t\t 8 外卖管理");
                             System.out.println("\t\t 9 退出");
                             System.out.println("======================================");
                             System.out.print("请输入你的选择: ");

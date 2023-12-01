@@ -1,5 +1,6 @@
 package service;
 
+import bean.Customer;
 import bean.Employee;
 import dao.CustomerDAO;
 import dao.EmployeeDAO;
@@ -12,9 +13,9 @@ public class CustomerService {
     // 方法，根据empID和pwd返回一个Employee对象
 
     public boolean setCustomerByIdAndPwd(String empID, String pwd,String name){
-        Employee employee = customerDAO.querySingle("select * from coffeeShop.customer where empID=? ", Employee.class, empID);
+        Customer customer = customerDAO.querySingle("select * from coffeeShop.customer where empID=? ", Customer.class, empID);
 
-        if(employee != null)
+        if(customer != null)
         {
             return false;
         }
@@ -25,8 +26,8 @@ public class CustomerService {
         }
 
     }
-    public Employee getCustomerByIdAndPwd(String empID, String pwd){
-        Employee employee = customerDAO.querySingle("select * from coffeeShop.employee where empID=? and pwd=md5(?)", Customer.class, empID, pwd);
-        return employee;
+    public Customer getCustomerByIdAndPwd(String empID, String pwd){
+        Customer customer= customerDAO.querySingle("select * from coffeeShop.customer where empID=? and pwd=md5(?)", Customer.class, empID, pwd);
+        return customer;
     }
 }
