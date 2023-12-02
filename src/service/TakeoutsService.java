@@ -11,9 +11,13 @@ import java.util.UUID;
 public class TakeoutsService {
     private TakeoutsDAO takeoutsDAO = new TakeoutsDAO();
     private MenuService menuService = new MenuService();
-    private DiningTableService diningTableService = new DiningTableService();
+
     // 生成账单
-    // 更新对应餐桌的状态
+    public boolean updateStateByBillID(String state,String billID){
+        int update = takeoutsDAO.update("update coffeeShop.takeoutsBill set state = ? where billID = ?",
+                state,billID);
+        return update > 0;
+    }
     public boolean orderTakeoutsMenu(int menuID, int nums,String address){
         String billID = UUID.randomUUID().toString();
 
@@ -26,7 +30,7 @@ public class TakeoutsService {
     }
 
     // 返回所有账单
-    public List<TakeoutsBill> list(){
+    public List<TakeoutsBill> listTakeouts(){
         return takeoutsDAO.queryMulti("select * from coffeeShop.takeoutsBill", TakeoutsBill.class);
     }
 

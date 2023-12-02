@@ -1,8 +1,12 @@
 package service;
 
+import bean.Customer;
+import bean.DiningTable;
 import bean.Employee;
+import dao.CustomerDAO;
 import dao.EmployeeDAO;
 
+import java.util.List;
 import java.util.UUID;
 
 public class EmployeeService {
@@ -10,8 +14,29 @@ public class EmployeeService {
     // 定义一个EmployDAO属性
     private EmployeeDAO employeeDAO = new EmployeeDAO();
 
-    // 方法，根据empID和pwd返回一个Employee对象
 
+    //获得顾客所有的信息
+    public List<Employee> listEmployee(){
+        List<Employee> employeeList = employeeDAO.queryMulti("select id, empID , NAME,job from coffeeShop.employee", Employee.class);
+
+        return employeeList;
+    }
+    //根据id，删除顾客信息
+
+    public boolean delectEmployeeByID(String empID){
+        int update = employeeDAO.update("delete from coffeeShop.employee where empID = ?",
+                empID);
+        return update > 0;
+    }
+
+    //更新顾客信息
+    public boolean updateEmployeePasswordByID(String pwd,String empID){
+        int update = employeeDAO.update("update coffeeShop.employee set pwd = md5(?) where empID = ?",
+                pwd,empID);
+        return update > 0;
+    }
+
+    // 方法，根据empID和pwd返回一个Employee对象
     public boolean setEmployeeByIdAndPwd(String empID, String pwd,String name){
         Employee employee = employeeDAO.querySingle("select * from coffeeShop.employee where empID=? ", Employee.class, empID);
 

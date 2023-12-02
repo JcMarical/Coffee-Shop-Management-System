@@ -1,13 +1,7 @@
 package view;
 
-import bean.Bill;
-import bean.DiningTable;
-import bean.Employee;
-import bean.Menu;
-import service.BillService;
-import service.DiningTableService;
-import service.EmployeeService;
-import service.MenuService;
+import bean.*;
+import service.*;
 import utils.Utility;
 
 import java.util.List;
@@ -19,6 +13,10 @@ public class EmployeeView {
     private DiningTableService diningTableService = new DiningTableService();
     private MenuService menuService = new MenuService();
     private BillService billService = new BillService();
+
+    private CustomerService customerService = new CustomerService();
+
+    private TakeoutsService takeoutsService= new TakeoutsService();
 
     public void listDiningTable(){
         System.out.println("显示餐桌状态");
@@ -131,6 +129,82 @@ public class EmployeeView {
         System.out.println("================显示完毕================");
     }
     // 完成结账
+
+    public void listCustomer(){
+        System.out.println("==============顾客信息查询===============");
+        List<Customer> listCustomer  = customerService.listCustomer();
+        System.out.println("编号\t账号\t\t姓名\t\t权限");
+        for(Customer customer : listCustomer){
+            System.out.println(customer);
+        }
+        System.out.print("请选择要修改信息的顾客ID(-1退出): ");
+        String customerID = Utility.readString(50);
+        if("-1".equals(customerID)){
+            System.out.println("==================取消顾客查询===============");
+            return;
+        }
+        else{
+            System.out.print("请输入顾客需要修改的密码(-1退出): ");
+            String pwd = Utility.readString(50);
+            if("-1".equals(pwd)){
+                System.out.println("==================取消顾客查询===============");
+
+            }
+            else{
+                System.out.print("确认修改信息？");
+                char key = Utility.readConfirmSelection();
+                if(key == 'Y') {
+                    // 修改密码
+                    if ( customerService.updateCustomerPasswordByID(pwd, customerID)){
+                        System.out.println("==================信息修改成功===============");
+                    }else{
+                        System.out.println("==================信息修改失败===============");
+
+                    }
+                }
+            }
+
+        }
+
+
+    }
+    public void listTakeouts(){
+        System.out.println("==================外卖管理===============");
+        System.out.println("显示账单信息");
+        List<TakeoutsBill> listTakeouts  = takeoutsService.listTakeouts();
+        System.out.println("\t编号\t\t餐品号\t\t餐品量\t\t金额\t\t日期\t\t\t\t\t\t\t状态\t地址");
+        for(TakeoutsBill takeoutsBill : listTakeouts ){
+            System.out.println(takeoutsBill);
+        }
+        System.out.print("请选择要修改信息的账单编号(-1退出): ");
+        String billID = Utility.readString(50);
+        if("-1".equals(billID)){
+            System.out.println("==================取消账单修改===============");
+            return;
+        }
+        else{
+            System.out.print("请输入该账单状态(-1退出): ");
+            String state = Utility.readString(50);
+            if("-1".equals(state)){
+                System.out.println("==================取消状态修改===============");
+            }
+            else{
+                System.out.print("确认修改信息？");
+                char key = Utility.readConfirmSelection();
+                if(key == 'Y') {
+                    // 修改密码
+                    if (takeoutsService.updateStateByBillID(state, billID)){
+                        System.out.println("==================信息修改成功===============");
+                    }else{
+                        System.out.println("==================信息修改失败===============");
+
+                    }
+                }
+            }
+
+        }
+    }
+
     public void payBill(){
         System.out.println("=================结账服务==================");
         System.out.print("请选择要结账的餐桌编号(-1退出): ");
@@ -232,7 +306,10 @@ public class EmployeeView {
                                     payBill();
                                     break;
                                 case "7":
+                                    listCustomer();
+                                    break;
                                 case "8":
+                                    listTakeouts();
                                     break;
                                 case "9":
                                     loop = false;

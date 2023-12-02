@@ -16,16 +16,13 @@ public class TakeoutsBill {
     @Override
 
     public String toString() {
-        return "takeoutsBill{" +
-                "id=" + id +
-                ", billID='" + billID + '\'' +
-                ", menuID=" + menuID +
-                ", nums=" + nums +
-                ", money=" + money +
-                ", billDate=" + billDate +
-                ", state='" + state + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return "\t" + billID +
+                "\t\t" + menuID +
+                "\t\t\t" + nums +
+                "\t\t\t" + money +
+                "\t\t" + billDate +
+                "\t\t" + state +
+                "\t" + address;
     }
 
     public int getId() {
@@ -92,6 +89,7 @@ public class TakeoutsBill {
         this.address = address;
     }
 
+    public TakeoutsBill(){}
     public TakeoutsBill(int id, String billID, Integer menuID, Integer nums, Double money, Date billDate, String state, String address) {
         this.id = id;
         this.billID = billID;
