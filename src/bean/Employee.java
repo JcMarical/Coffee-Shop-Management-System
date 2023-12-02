@@ -8,7 +8,7 @@ public class Employee {
     private String job;
 
     public Employee(){
-        // 无参构造器, apache-dbutils需要用到
+        // 无参构造器
     }
 
     public Employee(Integer id, String empID, String pwd, String name, String job) {

@@ -1,17 +1,17 @@
 package bean;
 
-public class Administer {
+public class Administrator {
     private Integer id;
     private String empID;
     private String pwd;
     private String name;
     private String job;
 
-    public Administer(){
+    public Administrator(){
         // 无参构造器, apache-dbutils需要用到
     }
 
-    public Administer(Integer id, String empID, String pwd, String name, String job) {
+    public Administrator(Integer id, String empID, String pwd, String name, String job) {
         this.id = id;
         this.empID = empID;
         this.pwd = pwd;

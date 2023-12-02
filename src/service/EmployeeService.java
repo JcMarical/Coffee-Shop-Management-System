@@ -23,7 +23,7 @@ public class EmployeeService {
     }
     //根据id，删除顾客信息
 
-    public boolean delectEmployeeByID(String empID){
+    public boolean deleteEmployeeByID(String empID){
         int update = employeeDAO.update("delete from coffeeShop.employee where empID = ?",
                 empID);
         return update > 0;

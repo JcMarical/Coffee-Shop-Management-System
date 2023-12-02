@@ -1067,7 +1067,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <user id="299" parent="1" name="root"/>
-    <table id="300" parent="288" name="administer">
+    <table id="300" parent="288" name="administrator">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb3_general_ci</CollationName>
     </table>
@@ -1221,7 +1221,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="331" parent="302" name="id">
-      <AutoIncrement>4</AutoIncrement>
+      <AutoIncrement>5</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1303,7 +1303,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="346" parent="304" name="id">
-      <AutoIncrement>4</AutoIncrement>
+      <AutoIncrement>6</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>

@@ -8,8 +8,6 @@ import dao.EmployeeDAO;
 import java.util.List;
 
 public class CustomerService {
-    // 通过调用EmployeeDAO来完成对employ表的各种操作
-    // 定义一个EmployDAO属性
     private CustomerDAO customerDAO = new CustomerDAO();
 
     // 方法，根据empID和pwd返回一个Employee对象
@@ -21,7 +19,7 @@ public class CustomerService {
     }
     //根据id，删除顾客信息
 
-    public boolean delectCustomerByID(String empID){
+    public boolean deleteCustomerByID(String empID){
         int update = customerDAO.update("delete from coffeeShop.customer where empID = ?",
                 empID);
         return update > 0;

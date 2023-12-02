@@ -179,46 +179,6 @@ public class CustomerView {
         }
         System.out.println("================显示完毕================");
     }
-    // 完成结账
-    public void payBill(){
-        System.out.println("=================结账服务==================");
-        System.out.print("请选择要结账的餐桌编号(-1退出): ");
-        int diningTableID = Utility.readInt();
-        if(diningTableID==-1){
-            System.out.println("==================取消结账===============");
-            return;
-        }
-        // 验证餐桌是否存在
-        DiningTable diningTable = diningTableService.getDiningTableByID(diningTableID);
-        if(diningTable==null){
-            System.out.println("==================结账的餐桌不存在===============");
-            return;
-        }
-        // 验证餐桌是否有需要结账的账单
-        if(!billService.hasPayBillByDiningTableID(diningTableID)){
-            System.out.println("==================没有需要结账的账单===============");
-            return;
-        }
-        System.out.print("请选择结账方式(现金/支付宝/微信): ");
-        String payMode = Utility.readString(10);
-        if(payMode.equals("")){
-            System.out.println("==================取消结账===============");
-            return;
-        }
-        char key = Utility.readConfirmSelection();
-        if(key=='Y'){
-            // 结账
-            boolean result = billService.payBill(diningTableID, payMode);
-            if(result){
-                System.out.println("==================结账成功===============");
-            }else{
-                System.out.println("==================结账失败===============");
-            }
-        }
-        else{
-            System.out.println("==================取消结账===============");
-        }
-    }
 
     // 显示主菜单
     public void mainMenu(){

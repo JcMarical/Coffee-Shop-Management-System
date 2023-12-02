@@ -137,7 +137,7 @@ public class EmployeeView {
         for(Customer customer : listCustomer){
             System.out.println(customer);
         }
-        System.out.print("请选择要修改信息的顾客ID(-1退出): ");
+        System.out.print("请选择要修改信息的顾客账号(-1退出): ");
         String customerID = Utility.readString(50);
         if("-1".equals(customerID)){
             System.out.println("==================取消顾客查询===============");

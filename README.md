@@ -81,8 +81,8 @@ INSERT INTO customer VALUES(NULL, '100003', MD5('123456'), '郑颖佳', '会员'
 
 SELECT * FROM customer;
 
--- 创建administor表
-CREATE TABLE `administer`(
+-- 创建administrator表
+CREATE TABLE `administrator`(
                            id INT AUTO_INCREMENT,
                            empID VARCHAR(50) UNIQUE NOT NULL DEFAULT '',
                            pwd CHAR(32) NOT NULL DEFAULT '',
@@ -92,10 +92,10 @@ CREATE TABLE `administer`(
 )CHARSET=utf8;
 -- 添加测试数据
 
-INSERT INTO administer VALUES(NULL, '200001', MD5('123456'), '李俊呈', '管理员');
+INSERT INTO administrator VALUES(NULL, '200001', MD5('123456'), '李俊呈', '管理员');
 
 
-SELECT * FROM administer; 
+SELECT * FROM administrator; 
 
 
 -- 创建餐桌表
