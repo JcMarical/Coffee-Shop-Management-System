@@ -13,16 +13,15 @@ public class TakeoutsService {
     private MenuService menuService = new MenuService();
 
     // 生成账单
-    public boolean updateStateByBillID(String state,String billID){
-        int update = takeoutsDAO.update("update coffeeShop.takeoutsBill set state = ? where billID = ?",
-                state,billID);
+    public boolean updateStateByID(String state,String id){
+        int update = takeoutsDAO.update("update coffeeShop.takeoutsBill set state = ? where id = ?",
+                state,id);
         return update > 0;
     }
     public boolean orderTakeoutsMenu(int menuID, int nums,String address){
         String billID = UUID.randomUUID().toString();
-
         int update = takeoutsDAO.update("insert into coffeeShop.takeoutsBill values(null,?,?,?,?,now(),'正在制作',?)",
-                billID, menuID, nums, menuService.getMenuByID(menuID).getPrice()*nums, address);
+                 billID ,menuID, nums, menuService.getMenuByID(menuID).getPrice()*nums, address);
         if(update <= 0){
             return false;
         }

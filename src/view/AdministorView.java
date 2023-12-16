@@ -48,7 +48,6 @@ public class AdministorView {
             String pwd = Utility.readString(50);
             if("-1".equals(pwd)){
                 System.out.println("==================取消顾客查询===============");
-
             }
             else{
                 System.out.print("确认修改信息？");
@@ -59,7 +58,6 @@ public class AdministorView {
                         System.out.println("==================信息修改成功===============");
                     }else{
                         System.out.println("==================信息修改失败===============");
-
                     }
                 }
             }
@@ -71,23 +69,23 @@ public class AdministorView {
 
     public void listEmployee(){
 
-        System.out.println("============顾客信息查询修改==============");
+        System.out.println("============店员信息查询修改==============");
         List<Employee> listEmployee  = employeeService.listEmployee();
         System.out.println("编号\t账号\t\t姓名\t\t权限");
         for(Employee employee : listEmployee){
             System.out.println(employee);
         }
-        System.out.print("请选择要修改信息的顾客账号(-1退出): ");
+        System.out.print("请选择要修改信息的店员账号(-1退出): ");
         String employeeID = Utility.readString(50);
         if("-1".equals(employeeID)){
-            System.out.println("==================取消顾客查询===============");
+            System.out.println("==================取消店员查询===============");
             return;
         }
         else{
-            System.out.print("请输入顾客需要修改的密码(-1退出): ");
+            System.out.print("请输入店员需要修改的密码(-1退出): ");
             String pwd = Utility.readString(50);
             if("-1".equals(pwd)){
-                System.out.println("==================取消顾客查询===============");
+                System.out.println("==================取消店员查询===============");
 
             }
             else{
@@ -174,7 +172,6 @@ public class AdministorView {
             System.out.println("\t\t 1 登录品悦咖啡");
             System.out.println("\t\t 2 注册品悦咖啡");
             System.out.println("\t\t 3 退出品悦咖啡");
-
             System.out.print("请输入你的选择: ");
             key = Utility.readString(1);
             switch (key){
@@ -185,10 +182,9 @@ public class AdministorView {
                     System.out.print("请输入密码: ");
                     String pwd = Utility.readString(50);
 
-
                     // 到数据库去判断
 
-                   //Employee employee = employeeService.getEmployeeByIdAndPwd(empID, pwd);
+                    //Employee employee = employeeService.getEmployeeByIdAndPwd(empID, pwd);
                     Administrator administrator = administratorService.getAdministratorByIdAndPwd(empID,pwd);
 
 
@@ -221,9 +217,7 @@ public class AdministorView {
                                 case "5":
                                     deleteEmployee();
                                     break;
-
-
-                                case "9":
+                                case "6":
                                     loop = false;
                                     System.out.println("退出品悦咖啡系统");
                                     break;

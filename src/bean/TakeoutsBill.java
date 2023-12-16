@@ -16,13 +16,13 @@ public class TakeoutsBill {
     @Override
 
     public String toString() {
-        return "\t" + billID +
+        return "\t" + id +
                 "\t\t" + menuID +
                 "\t\t\t" + nums +
                 "\t\t\t" + money +
                 "\t\t" + billDate +
                 "\t\t" + state +
-                "\t" + address;
+                "\t\t" + address;
     }
 
     public int getId() {

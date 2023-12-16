@@ -58,4 +58,12 @@ public class Employee {
     public void setJob(String job) {
         this.job = job;
     }
+
+    @Override
+    public String toString() {
+        return id +" \t"+
+                empID + '\t'+
+                name + '\t' +
+                job;
+    }
 }

@@ -172,13 +172,13 @@ public class EmployeeView {
         System.out.println("==================外卖管理===============");
         System.out.println("显示账单信息");
         List<TakeoutsBill> listTakeouts  = takeoutsService.listTakeouts();
-        System.out.println("\t编号\t\t餐品号\t\t餐品量\t\t金额\t\t日期\t\t\t\t\t\t\t状态\t地址");
+        System.out.println("\t编号\t\t餐品号\t\t餐品量\t\t金额\t\t\t日期\t\t\t\t\t\t\t状态\t\t\t地址");
         for(TakeoutsBill takeoutsBill : listTakeouts ){
             System.out.println(takeoutsBill);
         }
         System.out.print("请选择要修改信息的账单编号(-1退出): ");
-        String billID = Utility.readString(50);
-        if("-1".equals(billID)){
+        String id = Utility.readString(50);
+        if("-1".equals(id)){
             System.out.println("==================取消账单修改===============");
             return;
         }
@@ -193,7 +193,7 @@ public class EmployeeView {
                 char key = Utility.readConfirmSelection();
                 if(key == 'Y') {
                     // 修改密码
-                    if (takeoutsService.updateStateByBillID(state, billID)){
+                    if (takeoutsService.updateStateByID(state, id)){
                         System.out.println("==================信息修改成功===============");
                     }else{
                         System.out.println("==================信息修改失败===============");
