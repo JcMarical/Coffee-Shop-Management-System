@@ -1,13 +1,8 @@
 ## 咖啡店后台管理系统
 本项目使用用到了java SE、MySQL、JDBC，其中连接池使用Druid。
 
-### 程序总体框架
-
-![image-20210701160248635](C:\Users\songpeng\IdeaProjects\manhanlou\README.assets\image-20210701160248635.png)
 
 ### 1、准备工具类
-
-![image-20210701162459531](C:\Users\songpeng\IdeaProjects\manhanlou\README.assets\image-20210701162459531.png)
 
 将所需要的jar包和工具类导入项目，并进行简单测试。
 
@@ -32,16 +27,13 @@ public class Test {
 
 ### 2、简单界面
 
-在view层下建立MHLView文件
+该咖啡店后台管理系统为三种服务提供三种界面，在view层下分别建立"
+* AdministerView
+* EmployeeView
+* CustomerView文件
 
-```java
- 略
-```
-
-![image-20210701164612447](C:\Users\songpeng\IdeaProjects\manhanlou\README.assets\image-20210701164612447.png)
-
-### 3、sql
-
+### 3、Mysql数据库读写
+该咖啡店后台管理系统需要使用Mysql作为数据库进行数据读写，现提供所有的建表代码，建库后正常连接运行即可使用系统
 ```sql
 -- 创建品悦咖啡数据库
 CREATE DATABASE coffeeShop;
@@ -192,11 +184,11 @@ SELECT * FROM takeOutsBill;
 
 - 将上面的sql语句执行（mysql 8.0.22）
 - 修改druid.properties中的相关配置：
-```aidl
+```yaml
 #key=value
 driverClassName=com.mysql.cj.jdbc.Driver
-url=jdbc:mysql://192.168.173.132:3306/lingrui?&serverTimezone=UTC&rewriteBatchedStatements=true
-#url=jdbc:mysql://192.168.173.132:3306/lingrui
+url=jdbc:mysql://192.168.173.132:3306/{数据库名}?&serverTimezone=UTC&rewriteBatchedStatements=true
+#url=jdbc:mysql://192.168.173.132:3306/{数据库名}
 username=root
 password=123456
 #initial connection Size
@@ -208,6 +200,6 @@ maxActive=20
 #max wait time (5000 mil seconds)
 maxWait=5000
 ```
-- url:192.168.173.132:3306 修改为自己的ip地址（莫得服务器）
-- 数据库名：lingrui 修改成自己的数据库名
+- url:192.168.173.132:3306 修改为自己的ip地址（莫得服务器TT）
+- {数据库名}： 修改成自己的数据库名
 - password：123456 修改成自己的密码
