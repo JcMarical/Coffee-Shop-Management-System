@@ -90,22 +90,6 @@ INSERT INTO administrator VALUES(NULL, '200001', MD5('123456'), '李俊呈', '�
 SELECT * FROM administrator; 
 
 
--- 创建餐桌表
-CREATE TABLE `diningTable`(
-	id INT AUTO_INCREMENT,
-	state VARCHAR(20) NOT NULL DEFAULT '',
-	ordername VARCHAR(50) NOT NULL DEFAULT '',
-	ordertel VARCHAR(20) NOT NULL DEFAULT '',
-	PRIMARY KEY (id)
-)CHARSET=utf8;
-
-INSERT INTO diningTable VALUES(NULL, '空', '', '');
-INSERT INTO diningTable VALUES(NULL, '空', '', '');
-INSERT INTO diningTable VALUES(NULL, '空', '', '');
-
-SELECT * FROM diningTable;
-
-# update diningTable set state='空', orderName='', orderTel='' where id=1
 
 -- 创建餐桌表
 CREATE TABLE `diningTable`(
@@ -172,7 +156,7 @@ CREATE TABLE takeoutsBill(
                      PRIMARY KEY (id)
 )CHARSET=utf8;
 
-SELECT * FROM takeOutsBill;
+SELECT * FROM takeoutsBill;
 
 
 # update diningTable set state='空' where id=1;

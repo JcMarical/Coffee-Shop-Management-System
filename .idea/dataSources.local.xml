@@ -15,6 +15,7 @@
             <name qname="@" />
             <name qname="mhl" />
             <name qname="coffeeShop" />
+            <name qname="coffee" />
           </node>
         </introspection-scope>
       </schema-mapping>
